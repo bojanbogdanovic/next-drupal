@@ -458,6 +458,7 @@ export class DrupalClient {
   ): Promise<T> {
     options = {
       deserialize: true,
+      json: true,
       withAuth: this.withAuth,
       withCache: false,
       params: {},
@@ -492,7 +493,7 @@ export class DrupalClient {
 
     await this.throwIfJsonApiErrors(response)
 
-    const json = await response.json()
+    const json = options.json ? await response.json() : response
 
     /* c8 ignore next 3 */
     if (options.withCache) {
@@ -518,6 +519,7 @@ export class DrupalClient {
 
     options = {
       deserialize: true,
+      json: true,
       pathPrefix: "/",
       withAuth: this.getAuthFromContextAndOptions(context, options),
       params: {},
@@ -526,6 +528,7 @@ export class DrupalClient {
 
     const _options = {
       deserialize: options.deserialize,
+      json: options.json,
       isVersionable: options.isVersionable,
       locale: context.locale,
       defaultLocale: context.defaultLocale,

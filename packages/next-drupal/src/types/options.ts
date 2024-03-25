@@ -12,6 +12,7 @@ export interface FetchOptions extends RequestInit {
 
 export type JsonApiOptions = {
   deserialize?: boolean
+  json?: boolean
   params?: JsonApiParams
 } & JsonApiWithAuthOption &
   (
